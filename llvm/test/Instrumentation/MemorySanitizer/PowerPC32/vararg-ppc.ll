@@ -1,7 +1,7 @@
-; RUN: opt < %s -S -passes=msan 2>&1 | FileCheck %s
+; RUN: opt < %s -S -passes=msan 2>&1 -msan-origin-base=0x40000000 -msan-and-mask=0x80000000 | FileCheck %s
 
 target datalayout = "E-m:e-i64:64-n32:64"
-target triple = "powerpc64--linux"
+target triple = "powerpc--linux"
 
 define i32 @foo(i32 %guard, ...) {
   %vl = alloca ptr, align 8

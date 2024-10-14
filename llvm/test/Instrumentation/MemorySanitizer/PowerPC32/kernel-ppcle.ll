@@ -1,7 +1,7 @@
-; RUN: opt < %s -S -msan-kernel=1 -passes=msan 2>&1 | FileCheck %s
+; RUN: opt < %s -S -msan-kernel=1 -passes=msan 2>&1 -msan-origin-base=0x40000000 -msan-and-mask=0x80000000 | FileCheck %s
 
 target datalayout = "e-m:e-i64:64-n32:64"
-target triple = "powerpc64le--linux"
+target triple = "powerpcle--linux"
 
 define void @Store1(ptr %p, i8 %x) sanitize_memory {
 entry:
